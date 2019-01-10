@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "g++", // 任务名称，之后可以添加到launch.json的preLaunchTask
+            "type": "process", // 可以为shell或process，前者相当于先打开shell再输入命令，后者是直接运行命令
+            "command": "g++", // 要使用的编译器
+            "args": [
+                "${file}",
+                "-g",
+                "-Og",
+                "-std=c++17",
+                "-o",
+                "${workspaceRoot}/${fileBasenameNoExtension}.exe"
+            ], // 编译命令参数，根据自己情况修改
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
