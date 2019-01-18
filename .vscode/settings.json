@@ -34,6 +34,7 @@
   "background.useFront": false,
   "editor.minimap.enabled": false,
   "files.associations": {
+    "*.cpp": "cpp",
     "stdio.h": "c",
     "iostream": "c",
     "ostream": "c",
@@ -111,7 +112,8 @@
     "filesystem": "cpp",
     "string_view": "cpp",
     "xmemory": "cpp",
-    "optional": "cpp"
+    "optional": "cpp",
+    "string": "cpp"
   },
   "editor.mouseWheelZoom": true,
   "C_Cpp.default.intelliSenseMode": "gcc-x64",
