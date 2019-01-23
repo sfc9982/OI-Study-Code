@@ -31,10 +31,18 @@ int main()
     sort(w + 1, w + n + 1, cmp);
     for (int i = 1; i <= n; i++)
         for (int j = T; j >= w[i].c; j--)
+        {
+            if (j - w[i].c < 0)
+            {
+                dp[j] = max(dp[j], w[i].a - (j * w[i].b));
+                continue;
+            }
             dp[j] = max(dp[j], dp[j - w[i].c] + w[i].a - (j * w[i].b));
+        }
     int sum = 0;
     for (int i = 1; i <= T; i++)
         sum = max(sum, dp[i]);
     cout << sum << endl;
+    system("pause");
     return 0;
 }
