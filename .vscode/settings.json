@@ -123,4 +123,7 @@
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.lineHeight": 1.1,
   "terminal.integrated.letterSpacing": 1.05,
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.intelliSenseEngineFallback": "Disabled",
+  "C_Cpp.workspaceParsingPriority": "medium",
 }

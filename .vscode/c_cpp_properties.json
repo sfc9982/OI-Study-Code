@@ -3,11 +3,11 @@
         {
             "name": "MinGW-w64",
             "includePath": [
-                "C:/MinGW64/mingw64/include",
-                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include",
-                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
-                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
-                "C:/MinGW64/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32/bits",
+                "C:\\MinGW64\\mingw64\\include\\**",
+                "C:\\MinGW64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\**",
+                "C:\\MinGW64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\**",
+                "C:\\MinGW64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\x86_64-w64-mingw32\\**",
+                "C:\\MinGW64\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\8.1.0\\include\\c++\\x86_64-w64-mingw32\\bits\\**",
                 "${workspaceFolder}"
             ],
             "defines": [
@@ -20,7 +20,7 @@
                 "_UNICODE",
                 "${default}"
             ],
-            "compilerPath": "C:/MinGW64/mingw64/bin/g++.exe",
+            "compilerPath": "C:\\MinGW64\\mingw64\\bin\\g++.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64"
