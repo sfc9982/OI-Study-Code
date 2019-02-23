@@ -4,7 +4,6 @@
   "editor.fontSize": 18,
   "workbench.iconTheme": "vscode-icons",
   "workbench.colorTheme": "One Dark Pro",
-  "terminal.integrated.rendererType": "auto",
   "code-runner.clearPreviousOutput": true,
   "code-runner.ignoreSelection": true,
   "code-runner.saveFileBeforeRun": true,
@@ -113,11 +112,15 @@
     "string_view": "cpp",
     "xmemory": "cpp",
     "optional": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "queue": "cpp"
   },
   "editor.mouseWheelZoom": true,
   "C_Cpp.default.intelliSenseMode": "gcc-x64",
   "editor.fontFamily": "等距更纱黑体 SC, Consolas, 微软雅黑, 'Courier New', monospace",
   "terminal.integrated.fontFamily": "Lucida Console, 更纱黑体 UI SC",
   "background.enabled": false,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.lineHeight": 1.1,
+  "terminal.integrated.letterSpacing": 1.05,
 }
