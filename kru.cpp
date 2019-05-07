@@ -53,6 +53,6 @@ int main()
     stable_sort(e, e + m + 1, cmp);
     kru();
     cout << n - 1 << " " << ans << endl;
-    system("pause");
+    // system("pause");
     return 0;
 }
