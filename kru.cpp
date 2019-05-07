@@ -47,7 +47,12 @@ void kru()
 
 int main()
 {
-
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++)
+        cin >> e[i].u >> e[i].v >> e[i].w;
+    stable_sort(e, e + m + 1, cmp);
+    kru();
+    cout << n - 1 << " " << ans << endl;
     system("pause");
     return 0;
 }
