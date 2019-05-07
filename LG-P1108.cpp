@@ -1,96 +1,56 @@
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <map>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-bool ok;
-long long h[5000], sum[5000], low[5000];
-
-struct str
+struct Str
 {
-    double l, r;
-} a[1010];
-
-bool cmp(str a, str b)
+    int x1, y1, x2, y2, color;
+} a[17];
+vector<int> G[17];
+int n, s = 1000000, flag[17];
+int chack(int w)
 {
-    return a.l * a.r < b.l * b.r;
-}
-
-void times(long long x)
-{
-    long long t = 0;
-    for (long long i = 1; i <= h[0]; i++)
+    int t = G[w].size();
+    for (int i = 0; i < t; i++)
     {
-        h[i] = h[i] * x + t;
-        t = h[i] / 10;
-        h[i] %= 10;
-        if (t > 0 && i >= h[0])
-            h[0]++;
+        if (flag[G[w][i]] == 0)
+            return 0;
     }
+    return 1;
 }
-
-void div(long long x)
+void dfs(int cnt, int sum, int lst)
 {
-    long long t = 0;
-    ok = true;
-    memset(sum, 0, sizeof(sum));
-    for (long long i = h[0]; i > 0; i--)
+    if (cnt == n)
     {
-        sum[i] = (h[i] + 10 * t) / x;
-        t = (h[i] + 10 * t) % x;
-        if (sum[i] && ok)
+        s = min(s, sum);
+        return;
+    }
+    if (sum >= s)
+        return;
+    for (int i = 1; i <= n; i++)
+    {
+        if (flag[i] == 0 && chack(i) == 1)
         {
-            sum[0] = i;
-            ok = false;
+            flag[i] = 1;
+            dfs(cnt + 1, sum + (lst != a[i].color), a[i].color);
+            flag[i] = 0;
         }
     }
 }
-
-bool status(long long b[], long long w[])
-{
-    if (b[0] > w[0])
-        return false;
-    if (b[0] < w[0])
-        return true;
-    for (long long i = b[0]; i > 0; i--)
-    {
-        if (b[i] < w[i])
-            return true;
-        if (b[i] > w[i])
-            return false;
-    }
-    return false;
-}
-
-void Print(long long b[])
-{
-    long long i;
-    for (i = b[0]; i > 0 && b[i] == 0; i--)
-        ;
-    for (; i > 0; i--)
-        cout << b[i];
-    cout << endl;
-}
-
 int main()
 {
-    long long n;
     cin >> n;
-    for (int i = 0; i <= n; i++)
-        cin >> a[i].l >> a[i].r;
-    stable_sort(a + 1, a + 1 + n, cmp);
-    h[0] = 1;
-    h[1] = 1;
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        times(a[i].l);
-        div(a[i + 1].r);
-        if (status(low, sum))
-            memcpy(low, sum, sizeof(sum));
+        cin >> a[i].x1 >> a[i].y1 >> a[i].x2 >> a[i].y2 >> a[i].color;
     }
-    Print(low);
-    system("pause");
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (i != j && a[i].x1 == a[j].x2 && (a[i].y2 >= a[j].y1 && a[i].y1 <= a[j].y2))
+                G[i].push_back(j);
+        }
+    }
+    dfs(0, 0, 0);
+    cout << s << endl;
     return 0;
 }

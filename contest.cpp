@@ -1,81 +1,71 @@
+#include <stdio.h>
+#include <queue>
+#include <string.h>
 #include <iostream>
-#include <vector>
-#include <cstring>
-#include <algorithm>
-
 using namespace std;
 
-bool stat;
-int n, m, l, r, s;
-int x, y, p[100050], a[100050];
-vector<int> G[100050];
-
-void Search(int c)
+typedef struct node
 {
-    cin >> l >> r >> s;
-    int x = 0, y = 0;
-    stat = true;
-    for (int i = 2; i * i <= s; i++)
+    int x;
+    int y;
+    int step;
+} Node;
+
+int map[310][310];
+int dir[8][2] = {-1, 2, 1, 2, 2, 1, 2, -1, 1, -2, -1, -2, -2, -1, -2, 1};
+
+void BFS(int n, int sx, int sy, int tx, int ty)
+{
+    if (sx == tx && sy == ty)
     {
-        y = 0;
-        if (s % i == 0)
+        printf("0\n");
+        return;
+    }
+    Node a;
+    queue<Node> q;
+    a.x = sx;
+    a.y = sy;
+    a.step = 0;
+    map[sx][sy] = 1;
+    q.push(a);
+    while (!q.empty())
+    {
+        a.x = q.front().x;
+        a.y = q.front().y;
+        a.step = q.front().step;
+        q.pop();
+        if (a.x == tx && a.y == ty)
         {
-            while (s % i == 0)
+            printf("%d\n", a.step);
+            return;
+        }
+        for (int i = 0; i < 8; i++)
+        {
+            Node Next;
+            Next.x = a.x + dir[i][0];
+            Next.y = a.y + dir[i][1];
+            Next.step = a.step + 1;
+            if (Next.x >= 0 && Next.x < n && Next.y >= 0 && Next.y < n && map[Next.x][Next.y] == 0)
             {
-                s /= i;
-                y++;
-            }
-            int t;
-            t = upper_bound(G[i].begin(), G[i].end(), r) - lower_bound(G[i].begin(), G[i].end(), l);
-            if (t < y)
-            {
-                stat = false;
-                break;
+                map[Next.x][Next.y] = 1;
+                q.push(Next);
             }
         }
     }
-    if (s > 1)
-    {
-        x = s;
-        y = 1;
-        int t;
-        t = upper_bound(G[s].begin(), G[s].end(), r) - lower_bound(G[s].begin(), G[s].end(), l);
-        if (t < 1)
-            stat = 0;
-    }
-    if (stat)
-        cout << "Yes";
-    else
-        cout << "No";
-    if (c)
-        cout << endl;
-    return;
 }
 
 int main()
 {
-    int T;
-    cin >> T;
-    while (T--)
+    int nCase;
+    int n;
+    int sx, sy, tx, ty;
+    scanf("%d", &nCase);
+    for (int i = 0; i < nCase; i++)
     {
-        int a[100050];
-        cin >> n >> m;
-        for (int i = 1; i <= n; i++)
-        {
-            cin >> a[i];
-            for (int j = 2; j * j <= a[i]; j++)
-            {
-                while (a[i] % j == 0)
-                {
-                    G[j].push_back(i);
-                    a[i] /= j;
-                }
-            }
-            if (a[i] > 1)
-                G[a[i]].push_back(i);
-        }
-        while (m--)
-            Search(m);
+        memset(map, 0, sizeof(map));
+        scanf("%d", &n);
+        scanf("%d%d%d%d", &sx, &sy, &tx, &ty);
+        BFS(n, sx, sy, tx, ty);
     }
     return 0;
 }
