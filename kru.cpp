@@ -1,31 +1,58 @@
-#include<iostream>
-#include<cstdio>
-#include<cstring>
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+
 using namespace std;
-char ss[10010],s[10001000];
-int main()
+
+struct str
 {
-    int n,tot;
-    cin>>n;
-    for(int i=1;i<=n;i+=72)
+    int u, v, w;
+} e[1000050];
+
+int n, m, ans;
+int fa[1050];
+
+inline bool cmp(const str &a, const str &b)
+{
+    return a.w < b.w;
+}
+
+int f(int x)
+{
+    if (fa[x] == x)
+        return x;
+    return fa[x] = f(fa[x]);
+}
+
+void kru()
+{
+    int u, v, a, b, cnt = 0;
+    for (int i = 1; i <= n; i++)
+        fa[i] = i;
+    for (int i = 1; i <= m; i++)
     {
-        scanf("%s",ss+1);
-        for(int j=1;j<=72;j++)
-        s[++tot]=ss[j];
-    }
-    for(int i=1;i<=n;i++)
-    s[i+n]=s[i];
-    int i=1,j=2,k=0;
-    while((i<=n&&j<=n)&&k<=n)
-    {
-        if(s[i+k]==s[j+k]) k++;
-        else
+        u = e[i].u;
+        v = e[i].v;
+        a = f(u);
+        b = f(v);
+        if (a != b)
         {
-            if(s[i+k]<s[j+k]) j+=k+1;
-            else i+=k+1;
-            k=0;
-            if(i==j) j++;
+            fa[a] = b;
+            ans = e[i].w;
+            cnt++;
         }
     }
-    cout<<i-1<<endl;
+}
+
+int main()
+{
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++)
+        cin >> e[i].u >> e[i].v >> e[i].w;
+    stable_sort(e, e + m + 1, cmp);
+    kru();
+    cout << n - 1 << " " << ans << endl;
+    // system("pause");
+    return 0;
 }
